@@ -2,6 +2,24 @@
 
 面向本地团队复盘的 Node.js 22 应用。服务端使用零第三方运行时依赖的 ESM，仅从本机 Git 仓库读取历史并生成统计；浏览器端提供时间、仓库、分支、作者范围、成员和聚合粒度筛选。
 
+## macOS 下载版
+
+从 GitHub Releases 下载 `GitContributionDashboard-v1.2.0-macos-arm64.zip`，解压后把“Git贡献看板.app”拖入“应用程序”。当前安装包适用于 Apple Silicon Mac（M1/M2/M3/M4），已经内置 Node.js，不需要安装 npm 依赖。
+
+首次打开后：
+
+1. 点击“选择本地仓库…”添加本机已经克隆的 Git 仓库，或点击“添加远程仓库…”填写 HTTP(S) Git 地址。
+2. 按需点击“添加成员…”填写姓名、工号、Git 作者名和邮箱；也可以直接编辑完整 JSON。
+3. 点击“保存并启动”。首次无缓存时，页面会自动扫描仓库。
+
+配置、缓存、托管仓库和日志分别保存在：
+
+```text
+~/Library/Application Support/Git贡献看板/
+```
+
+Release 安装包不会包含任何真实仓库地址、人员姓名或邮箱。远程私有仓库需要系统 Git 已能通过 Credential Helper 访问。由于当前安装包使用临时签名而非 Apple Developer 公证签名，首次运行如被 macOS 拦截，请在 Finder 中右键应用选择“打开”。
+
 ## 功能
 
 - 以“个人代码贡献排行榜”为主视图，集中展示每个人的新增行、删除行、净增行、变更总量、有效提交、Merge、活跃天数和平均变更量
@@ -93,6 +111,23 @@ npm run dev
 ```
 
 `start` 与 `dev` 默认读取 `config/app.local.json`。打开服务启动日志给出的本地地址即可访问看板。
+
+## 构建 macOS 安装包
+
+需要 macOS、Xcode Command Line Tools，以及 arm64 Node.js 22+：
+
+```sh
+NODE_BINARY="$(command -v node)" npm run build:macos
+```
+
+构建结果写入 `outputs/`：
+
+```text
+Git贡献看板.app
+GitContributionDashboard-v1.2.0-macos-arm64.zip
+```
+
+构建脚本会把 Node.js、服务端与前端资源打入 App Bundle，并执行临时签名。正式对外分发若要消除系统安全提示，还需要使用 Apple Developer ID 签名和 Notarization。
 
 ## API
 

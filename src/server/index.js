@@ -47,8 +47,16 @@ async function defaultAggregator() {
 export async function createApplication(options = {}) {
   const projectRoot = path.resolve(options.projectRoot ?? PROJECT_ROOT);
   const configPath = path.resolve(options.configPath ?? process.env.GIT_STATS_CONFIG ?? path.join(projectRoot, 'config/app.local.json'));
-  const cacheDirectory = path.resolve(options.cacheDirectory ?? path.join(projectRoot, '.cache/git-stats'));
-  const publicDirectory = path.resolve(options.publicDirectory ?? path.join(projectRoot, 'public'));
+  const cacheDirectory = path.resolve(
+    options.cacheDirectory
+      ?? process.env.GIT_STATS_CACHE_DIRECTORY
+      ?? path.join(projectRoot, '.cache/git-stats')
+  );
+  const publicDirectory = path.resolve(
+    options.publicDirectory
+      ?? process.env.GIT_STATS_PUBLIC_DIRECTORY
+      ?? path.join(projectRoot, 'public')
+  );
   const config = options.config ?? await loadConfig(configPath);
   const cacheStore = options.cacheStore ?? createCacheStore(cacheDirectory);
   const scanner = options.scanner ?? scanRepository;

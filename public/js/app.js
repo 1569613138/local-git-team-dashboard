@@ -261,6 +261,12 @@ async function initialize() {
     elements.globalNotice.className = "notice";
     elements.globalNotice.textContent = "部分元数据加载失败，统计数据仍可继续使用。";
   }
+  const cacheMissing = repositoriesFrom(meta).length > 0 && Number(meta?.cache?.ready || 0) === 0;
+  if (cacheMissing && sessionStorage.getItem("git-dashboard-auto-refresh") !== "1") {
+    sessionStorage.setItem("git-dashboard-auto-refresh", "1");
+    await beginRefresh();
+    return;
+  }
   await loadStats();
 }
 
