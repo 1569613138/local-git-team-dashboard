@@ -1,0 +1,50 @@
+{
+  "repositories": [
+    {
+      "id": "example-repository",
+      "name": "示例仓库",
+      "path": "/absolute/path/to/app-managed-repository",
+      "remoteUrl": "https://gitea.example.com/team/repository.git",
+      "defaultBranch": "main",
+      "branches": [],
+      "enabled": true
+    }
+  ],
+  "members": [
+    {
+      "id": "example-member",
+      "displayName": "示例成员",
+      "names": [
+        "Example Developer"
+      ],
+      "emails": [
+        "developer@example.invalid"
+      ],
+      "internal": true
+    }
+  ],
+  "pathFilter": {
+    "directories": [
+      "node_modules",
+      "dist",
+      "build",
+      "coverage",
+      "vendor"
+    ],
+    "suffixes": [
+      ".min.js",
+      ".min.css",
+      ".map",
+      ".gz",
+      ".br",
+      ".zip",
+      ".tgz"
+    ],
+    "files": [
+      "package-lock.json",
+      "npm-shrinkwrap.json",
+      "yarn.lock",
+      "pnpm-lock.yaml"
+    ]
+  }
+}

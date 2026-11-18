@@ -1,0 +1,7 @@
+config/app.local.json
+.cache/
+.workbuddy/
+outputs/*
+!outputs/.gitkeep
+processed_image_*.png
+.DS_Store

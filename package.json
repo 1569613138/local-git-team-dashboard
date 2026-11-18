@@ -1,0 +1,17 @@
+{
+  "name": "local-git-team-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Node.js 22 零依赖 ESM 本地 Git 团队统计看板",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node src/server/index.js --config config/app.local.json",
+    "dev": "node --watch src/server/index.js --config config/app.local.json",
+    "test": "node --test",
+    "test:unit": "node --test \"test/unit/**/*.test.js\"",
+    "test:integration": "node --test \"test/integration/**/*.test.js\""
+  }
+}
